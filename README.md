@@ -6,7 +6,7 @@ Verilog RTL design and verification of a TinyRV1 processor system and custom har
 
 This project was developed as part of Cornell University's ECE 2300: Digital Logic and Computer Organization. The project involved designing, implementing, and verifying digital hardware components in Verilog, progressing from fundamental combinational and sequential logic to processor-level system design.
 
-The final system centers around a TinyRV1 processor and integrates custom RTL components, memory-bus control, and a hardware accumulation accelerator.
+The project culminated in a TinyRV1 processor-based system integrating custom RTL components, memory-bus control, and a hardware accumulation accelerator.
 
 ## Key Contributions
 
@@ -15,6 +15,57 @@ The final system centers around a TinyRV1 processor and integrates custom RTL co
 - Developed directed Verilog tests for arithmetic, memory, branch, jump, and multiply instructions.
 - Designed and verified sequential digital systems including counters, finite-state-machine controllers, and multi-note audio playback logic.
 - Used simulation and iterative RTL debugging to verify functional correctness across individual modules and integrated systems.
+
+## System Architecture
+
+The custom accumulation accelerator is organized into separate control and datapath modules and interfaces with the processor system through a memory interface.
+
+```text
+              +----------------------+
+              |     TinyRV1 System   |
+              +----------+-----------+
+                         |
+                         | Memory Interface
+                         v
+              +----------------------+
+              |  Accumulation Xcel   |
+              |                      |
+              |  +----------------+  |
+              |  | Control Logic  |  |
+              |  +-------+--------+  |
+              |          |           |
+              |  +-------v--------+  |
+              |  |    Datapath    |  |
+              |  |                |  |
+              |  | Size Register  |  |
+              |  | Index Counter  |  |
+              |  | Addr Counter   |  |
+              |  | Sum Register   |  |
+              |  +-------+--------+  |
+              +----------|-----------+
+                         |
+                         | mem_addr / mem_rdata
+                         v
+                    +---------+
+                    | Memory  |
+                    +---------+
+```
+
+## Verification
+
+The design was verified using directed Verilog testbenches at both the module and processor-instruction level.
+
+Testing included:
+
+- ALU arithmetic and logical operations
+- Register-file behavior
+- Load and store instructions
+- Branch and jump instructions
+- Multiply operations
+- Accelerator control and datapath behavior
+- Integrated processor functionality
+
+The project used iterative simulation and RTL debugging to identify and correct control, datapath, and timing-related logic errors.
 
 ## Technologies
 
